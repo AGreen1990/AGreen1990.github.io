@@ -74,6 +74,39 @@
             margin-bottom: 1.5rem;
             object-fit: cover;
         }
+
+        /* Styling for the new sections */
+        .bio, .skills, .projects {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 3px #00ff00;
+        }
+
+        ul {
+            list-style: none; /* Remove default bullet points */
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .list-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
     </style>
 </head>
 <body>
@@ -83,9 +116,36 @@
     <!-- Main content container -->
     <div class="content-container">
         <!-- The user's provided content -->
-        <img class="profile-image" src="doc/assets/IMG_4752.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000/00ff00?text=Profile';" alt="Profile picture">
+        <img class="profile-image" src="https://placehold.co/150x150/000/00ff00?text=Profile" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000/00ff00?text=Profile';" alt="Profile picture">
         <h1> Hello World!</h1>
         <p> This page is hosted using Github Pages!</p>
+        
+        <!-- === NEW SECTIONS START HERE === -->
+
+        <section class="bio">
+            <h2>About Me</h2>
+            <p>I am a data analyst apprentice with a passion for transforming complex data into actionable insights. I specialize in Python and R for data manipulation, visualization, and statistical analysis. I'm always looking for new challenges to grow my skills and contribute to meaningful projects.</p>
+        </section>
+
+        <section class="skills">
+            <h2>My Skills</h2>
+            <ul>
+                <li><span class="list-icon">🗄️</span> SQL</li>
+                <li><span class="list-icon">📊</span> R</li>
+                <li><span class="list-icon">📈</span> Data Visualization (R)</li>
+                <li><span class="list-icon">💻</span> Python</li>
+            </ul>
+        </section>
+
+        <section class="projects">
+            <h2>Projects</h2>
+            <ul>
+                <li><span class="list-icon">📂</span> <a href="#" style="color: #00ff00; text-decoration: none;">Capstone Project: Project Name</a> - A brief description of the project.</li>
+                <li><span class="list-icon">📂</span> <a href="#" style="color: #00ff00; text-decoration: none;">Data Analysis Portfolio</a> - A collection of my data analysis work.</li>
+            </ul>
+        </section>
+
+        <!-- === NEW SECTIONS END HERE === -->
     </div>
 
     <script>
