@@ -1,13 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test:Portfolio for Capstone project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alonzo | Data Analyst Apprentice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            background-color: #000;
+            color: #00ff00; /* Matrix green color */
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars, not needed for this effect */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Styling for the canvas element */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Place canvas behind other content */
+        }
+
+        /* Container for the main content to position it above the canvas */
+        .content-container {
+            z-index: 1; /* Ensure content is on top of the canvas */
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
+            border-radius: 12px;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            max-width: 90%;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .content-container {
+                max-width: 700px;
+            }
+        }
+
+        /* Heading and paragraph styling */
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 5px #00ff00;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-top: 0;
+            line-height: 1.5;
+        }
+
+        /* Image styling */
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Make the image circular */
+            border: 3px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-   <h1> Hello World!</h1> 
-   <p> This page is hosted using Github Pages!</p>
-   <img src="doc/assets/IMG_4752.jpeg" alt="squiggly cat">
+    <!-- Canvas element for the Matrix animation -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Main content container -->
+    <div class="content-container">
+        <!-- The user's provided content -->
+        <img class="profile-image" src="doc/assets/IMG_4752.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000/00ff00?text=Profile';" alt="Profile picture">
+        <h1> Hello World!</h1>
+        <p> This page is hosted using Github Pages!</p>
+    </div>
+
+    <script>
+        // Get the canvas and its 2D rendering context
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set the canvas size to fill the window
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        // Characters to be used in the animation
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890あいうえおカキクケコアイウエオザジズゼゾガギグゲゴサシスセソ';
+        const fontSize = 16;
+        const columns = Math.floor(width / fontSize);
+
+        // An array to keep track of the y-position of each falling character
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = Math.floor(Math.random() * height);
+        }
+
+        // The main animation loop
+        function draw() {
+            // Create a semi-transparent black rectangle to fade old characters
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, width, height);
+
+            // Set the font color and style
+            ctx.fillStyle = '#00ff00';
+            ctx.font = `${fontSize}px Inter, sans-serif`;
+
+            // Loop through each column and draw a character
+            for (let i = 0; i < drops.length; i++) {
+                // Pick a random character from the 'characters' string
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                
+                // Draw the character at the current column and drop position
+                ctx.fillText(text, i * fontSize, drops[i]);
+
+                // Reset the drop to the top if it's below the screen
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                // Increment the y-position of the drop
+                drops[i]++;
+            }
+        }
+
+        // Handle window resizing to keep the animation full-screen
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            // Recalculate columns and reset drops on resize
+            const newColumns = Math.floor(width / fontSize);
+            drops.length = newColumns;
+            for (let i = 0; i < newColumns; i++) {
+                if (drops[i] === undefined) {
+                    drops[i] = 0;
+                }
+            }
+        });
+
+        // Start the animation on window load
+        window.onload = function() {
+            setInterval(draw, 50); // Calls the draw function every 50ms
+        }
+    </script>
 </body>
 </html>
