@@ -149,71 +149,59 @@
         </div>
 
     <script>
-        // Get the canvas and its 2D rendering context
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
+    // Get the canvas and its 2D rendering context
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
 
-        // Set the canvas size to fill the window
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+    let width, height, columns, drops;
 
-        // Characters to be used in the animation
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890あいうえおカキクケコアイウエオザジズゼゾガギグゲゴサシスセソ';
-        const fontSize = 16;
-        const columns = Math.floor(width / fontSize);
+    // Function to set up and resize the canvas
+    function setupCanvas() {
+        // Set canvas dimensions
+        width = canvas.width = window.innerWidth;
+        // *** KEY CHANGE HERE ***
+        // Use scrollHeight to make the canvas as tall as the entire page content
+        height = canvas.height = document.body.scrollHeight;
 
-        // An array to keep track of the y-position of each falling character
-        const drops = [];
+        // Recalculate columns and reset drops on resize
+        columns = Math.floor(width / 16); // Using fontSize directly
+        drops = [];
         for (let x = 0; x < columns; x++) {
             drops[x] = Math.floor(Math.random() * height);
         }
+    }
 
-        // The main animation loop
-        function draw() {
-            // Create a semi-transparent black rectangle to fade old characters
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, width, height);
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890あいうえおカキクケコアイウエオザジズゼゾガギグゲゴサシスセソ';
+    const fontSize = 16;
 
-            // Set the font color and style
-            ctx.fillStyle = '#00ff00';
-            ctx.font = `${fontSize}px Inter, sans-serif`;
+    // The main animation loop
+    function draw() {
+        // Create a semi-transparent black rectangle to fade old characters
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, width, height);
 
-            // Loop through each column and draw a character
-            for (let i = 0; i < drops.length; i++) {
-                // Pick a random character from the 'characters' string
-                const text = characters[Math.floor(Math.random() * characters.length)];
-                
-                // Draw the character at the current column and drop position
-                ctx.fillText(text, i * fontSize, drops[i]);
+        // Set the font color and style
+        ctx.fillStyle = '#00ff00';
+        ctx.font = `${fontSize}px Inter, sans-serif`;
 
-                // Reset the drop to the top if it's below the screen
-                if (drops[i] * fontSize > height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+        // Loop through each column and draw a character
+        for (let i = 0; i < drops.length; i++) {
+            const text = characters[Math.floor(Math.random() * characters.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                // Increment the y-position of the drop
-                drops[i]++;
+            if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                drops[i] = 0;
             }
+            drops[i]++;
         }
+    }
 
-        // Handle window resizing to keep the animation full-screen
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            // Recalculate columns and reset drops on resize
-            const newColumns = Math.floor(width / fontSize);
-            drops.length = newColumns;
-            for (let i = 0; i < newColumns; i++) {
-                if (drops[i] === undefined) {
-                    drops[i] = 0;
-                }
-            }
-        });
+    // Handle window resizing to keep the animation full-screen
+    window.addEventListener('resize', setupCanvas);
 
-        // Start the animation on window load
-        window.onload = function() {
-            setInterval(draw, 50); // Calls the draw function every 50ms
-        }
-    </script>
-</body>
-</html>
+    // Start the animation on window load
+    window.onload = function() {
+        setupCanvas(); // Initial setup
+        setInterval(draw, 50); // Calls the draw function every 50ms
+    }
+</script>
