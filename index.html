@@ -14,12 +14,13 @@
             color: #00ff00; /* Matrix green color */
             font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow: hidden; /* Hide scrollbars, not needed for this effect */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            /* overflow: hidden;  <-- REMOVED THIS to allow scrolling */
+            /* The flex properties below were removed to stop centering the entire page */
+            /* display: flex; */
+            /* flex-direction: column; */
+            /* align-items: center; */
+            /* justify-content: center; */
+            /* min-height: 100vh; */
             position: relative;
         }
 
@@ -42,6 +43,7 @@
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
             max-width: 90%;
             transition: all 0.3s ease;
+            margin: 2rem auto; /* <-- ADDED THIS to center the container and add vertical spacing */
         }
 
         /* Responsive adjustments */
@@ -110,18 +112,12 @@
     </style>
 </head>
 <body>
-    <!-- Canvas element for the Matrix animation -->
     <canvas id="matrix-canvas"></canvas>
 
-    <!-- Main content container -->
     <div class="content-container">
-        <!-- The user's provided content -->
         <img class="profile-image" src="doc/assets/IMG_4752.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000/00ff00?text=Profile';" alt="Profile picture">
         <h1> Hello World!</h1>
-    
         
-        <!-- === NEW SECTIONS START HERE === -->
-
         <section class="bio">
             <h2>About Me</h2>
             <p>I am a data analyst apprentice with a passion for transforming complex data into actionable insights. I specialize in Python and R for data manipulation, visualization, and statistical analysis. I'm always looking for new challenges to grow my skills and contribute to meaningful projects.</p>
@@ -144,9 +140,13 @@
                 <li><span class="list-icon">📂</span> <a href="#" style="color: #00ff00; text-decoration: none;">Data Analysis Portfolio</a> - A collection of my data analysis work.</li>
             </ul>
         </section>
+        
+        <section class="contact">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out via email or connect on LinkedIn!</p>
+        </section>
 
-        <!-- === NEW SECTIONS END HERE === -->
-    </div>
+        </div>
 
     <script>
         // Get the canvas and its 2D rendering context
@@ -217,5 +217,3 @@
     </script>
 </body>
 </html>
-
-
