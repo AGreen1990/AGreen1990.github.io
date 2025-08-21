@@ -9,9 +9,9 @@ Creating portfolio for githhub and capstone project
 - Description
 - Links
 
-  ##Education
+  ###Education
 -
 
-  ##Work History
+  ###Work History
 - Workplace 1
 - Work Place 2
