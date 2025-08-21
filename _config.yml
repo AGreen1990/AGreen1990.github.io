@@ -1,0 +1,5 @@
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
+title: [Alonzo Green]
+description: [I am a data analyst apprentice with a passion for transforming complex data into actionable insights. I specialize in Python and R for data manipulation, visualization, and statistical analysis. I'm always looking for new challenges to grow my skills and contribute to meaningful projects.]
