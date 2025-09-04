@@ -71,6 +71,23 @@
             margin-top: 0;
             line-height: 1.5;
         }
+
+ /* --- NEW: Styling for all links with neon glow --- */
+        a {
+            color: #39ff14; /* Vibrant, neon-like green */
+            font-weight: bold;
+            text-decoration: none; /* Removes the default underline */
+            /* This adds the glow effect */
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.7), 0 0 10px rgba(57, 255, 20, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #4aff28;
+            /* Make the glow stronger on hover */
+            text-shadow: 0 0 10px rgba(74, 255, 40, 0.9), 0 0 20px rgba(74, 255, 40, 0.7);
+        }
+        
         .profile-image {
             width: 150px;
             height: 150px;
@@ -150,9 +167,9 @@
             <h2>Contact Info</h2>
             <ul>
                 <li><span class="list-icon">📧</span> Email: <a href="mailto:AGreen1990@gmail.com">AGreen1990@gmail.com</a></li>
-                <li><span class="list-icon">📊</span> Kaggle: <a href="https://www.kaggle.com/alonzogreen">https://www.kaggle.com/alonzogreen</a></li>
-                <li><span class="list-icon">📧</span> LinkedIn: <a href="https://www.linkedin.com/in/alonzo-green-6920a71238m1190g">www.linkedin.com/in/alonzo-green-6920a71238m1190g</a></li>
-        <ul>
+                <li><span class="list-icon">📊</span> Kaggle: <a href="https://www.kaggle.com/alonzogreen" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/alonzogreen</a></li>
+                <li><span class="list-icon">🔗</span> LinkedIn: <a href="https://www.linkedin.com/in/alonzo-green-6920a71238m1190g" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/...</a></li>
+            </ul>
         </section>
 
     </main>
